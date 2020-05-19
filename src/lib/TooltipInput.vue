@@ -1,15 +1,14 @@
 <template>
-  <div>
-    <el-tooltip :disabled="!toolTipDisabled" class="item" effect="dark" :content="temp_input" placement="top">
-      <el-input 
-        ref="input" 
-        v-model="temp_input"
-        :placeholder="placeholder"
-        :disabled="disabled"
-      >
-      </el-input>
-    </el-tooltip>
-  </div>
+  <el-tooltip :disabled="!toolTipDisabled" class="item" effect="dark" :content="value" placement="top">
+    <el-input 
+      ref="input" 
+      :value="value"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      @input="($event) => $emit('input', $event)"
+    >
+    </el-input>
+  </el-tooltip>
 </template>
 <script>
 
@@ -20,11 +19,10 @@ export default {
       temp_input: this.input
     }
   },
-  model: {
-    prop: 'input',
-    event: 'change'
-  },
   props: {
+    value: {
+      type: String
+    },
     input: {
       type: String,
       default: ''
@@ -52,11 +50,6 @@ export default {
     this.setToolTipDisabled();
   },
   watch: {
-    temp_input(val) {
-      this.$emit('change', val);
-      this.setToolTipDisabled();
-
-    },
     disabled() {
       this.setToolTipDisabled();
     }
