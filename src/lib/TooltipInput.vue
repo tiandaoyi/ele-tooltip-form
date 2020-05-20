@@ -1,5 +1,12 @@
 <template>
-  <el-tooltip :disabled="!toolTipDisabled" class="item" effect="dark" :content="value" placement="top">
+  <el-tooltip 
+    :disabled="!toolTipDisabled" 
+    class="item" 
+    effect="dark" 
+    :content="value" 
+    placement="top"
+    
+  >
     <el-input 
       ref="input" 
       :value="value"
@@ -16,7 +23,6 @@ export default {
   data() {
     return {
       toolTipDisabled: false,
-      temp_input: this.input
     }
   },
   props: {
@@ -47,8 +53,12 @@ export default {
     }
   },
   mounted() {
+    // console.log('mouted', this)
     this.setToolTipDisabled();
   },
+  // updated() {
+  //   console.log('updated')
+  // },
   watch: {
     disabled() {
       this.setToolTipDisabled();
