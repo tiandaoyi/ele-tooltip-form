@@ -4,7 +4,7 @@ vue插件，基于element-ui实现input输入框的tooltip
 
 ## 演示
 
-![演示图片](demo.gif "演示图片")
+[![演示图片](http://qam0b3d9s.bkt.clouddn.com/ele-tooltip-input.gif "dd")](https://github.com/tiandaoyi/ele-tooltip-input "演示图片")
 
 ## 功能
 
