@@ -20,6 +20,8 @@ vue插件，基于element-ui实现input输入框的tooltip
 ## 使用
 
 ```
+npm i ele-tooltip-input -S
+
 // main.js
 import 'EleTooltipInput' from 'ele-tooltip-input'
 Vue.use('EleTooltipInput')

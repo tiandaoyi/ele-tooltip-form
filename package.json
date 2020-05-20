@@ -1,7 +1,7 @@
 {
   "name": "ele-tooltip-input",
   "description": "based on vue and Element-ui",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "author": "tiandaoyi",
   "license": "MIT",
   "private": false,
