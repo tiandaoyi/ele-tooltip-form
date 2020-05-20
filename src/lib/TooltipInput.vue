@@ -1,6 +1,6 @@
 <template>
   <el-tooltip 
-    :disabled="!toolTipDisabled" 
+    :disabled="toolTipDisabled" 
     class="item" 
     effect="dark" 
     :content="value" 
@@ -13,6 +13,7 @@
       :placeholder="placeholder"
       :disabled="disabled"
       @input="($event) => $emit('input', $event)"
+      :type="type"
     >
     </el-input>
   </el-tooltip>
@@ -22,7 +23,8 @@
 export default {
   data() {
     return {
-      toolTipDisabled: false,
+      offsetWidth: 0,
+      scrollWidth: 0,
     }
   },
   props: {
@@ -30,8 +32,7 @@ export default {
       type: String
     },
     input: {
-      type: String,
-      default: ''
+      type: String | Number
     },
     placeholder: {
       type: String
@@ -39,31 +40,45 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    type: {
+      type: String,
+      default: 'text'
     }
   },
   methods: {
     setToolTipDisabled() {
-      let toolTipDisabled = this.toolTipDisabled;
       if (this.$refs.input) {
-        const offsetWidth = this.$refs['input'].$refs.input.offsetWidth;
-        const scrollWidth = this.$refs['input'].$refs.input.scrollWidth;
-        toolTipDisabled = this.disabled && (scrollWidth > offsetWidth);
+        this.offsetWidth = this.$refs['input'].$refs.input.offsetWidth;
+        this.scrollWidth = this.$refs['input'].$refs.input.scrollWidth;
       }
-      this.toolTipDisabled = toolTipDisabled;
     }
   },
-  mounted() {
-    // console.log('mouted', this)
+  updated() {
     this.setToolTipDisabled();
   },
-  // updated() {
-  //   console.log('updated')
-  // },
-  watch: {
-    disabled() {
-      this.setToolTipDisabled();
+  computed: {
+    toolTipDisabled() {
+      let offsetWidth = 0;
+      let scrollWidth = 0;
+      if (this.$refs.input) {
+        offsetWidth = this.$refs['input'].$refs && this.$refs['input'].$refs.input ? this.$refs['input'].$refs.input.offsetWidth || 0 : 0;
+        scrollWidth = this.$refs['input'].$refs && this.$refs['input'].$refs.input ? this.$refs['input'].$refs.input.scrollWidth || 0 : 0;
+      } else {
+        offsetWidth = this.offsetWidth;
+        scrollWidth = this.scrollWidth;
+      }
+      let formDisabled = false;
+      if (this.$parent && this.$parent._vnode && this.$parent._vnode.tag && this.$parent._vnode.tag === 'form') {
+        formDisabled = this.$parent.disabled;
+      } else if (this.$parent && this.$parent.$parent && this.$parent.$parent._vnode.tag && this.$parent.$parent._vnode.tag === 'form') {
+        formDisabled = this.$parent.$parent.disabled;
+      }
+      // false则显示tooltip  true则不显示
+      const isDomOverWidth = scrollWidth > offsetWidth;
+      return this.disabled ? !isDomOverWidth : formDisabled === true ? !isDomOverWidth : true;
     }
-  },
+  }
 }
 
 </script>

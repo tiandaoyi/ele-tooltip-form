@@ -17,7 +17,7 @@ export default {
   data () {
     return {
       disabled: false,
-      formDisabled: false,
+      formDisabled: true,
       placeholder: 'placeholder',
       msg: ''
     }
