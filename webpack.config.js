@@ -6,7 +6,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    library: 'EleTooltipInput',
+    library: 'EleTooltipForm',
     libraryTarget: 'umd',
     umdNamedDefine: true,
     filename: 'build.js'
