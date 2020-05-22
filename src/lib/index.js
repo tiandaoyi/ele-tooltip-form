@@ -1,10 +1,16 @@
 import EleTooltipInput from './TooltipInput';
+import EleTooltipSelect from './TooltipSelect';
 
-EleTooltipInput.install = (Vue) => {
-    Vue.component('EleTooltipInput', EleTooltipInput);
-    if (typeof window !== 'undefined' && window.Vue) {
-        window.Vue.use(EleTooltipInput)
-    }
+
+EleTooltipInput.install = function(Vue) {
+    Vue.component(EleTooltipInput.name, EleTooltipInput);
 }
 
-export default EleTooltipInput;
+EleTooltipSelect.install = function(Vue) {
+    Vue.component(EleTooltipSelect.name, EleTooltipSelect);
+}
+
+export {
+    EleTooltipInput,
+    EleTooltipSelect
+}

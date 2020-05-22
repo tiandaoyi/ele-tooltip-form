@@ -2,25 +2,26 @@
   <el-tooltip 
     :disabled="toolTipDisabled" 
     class="item" 
-    effect="dark" 
+    effect="light" 
     :content="value" 
     placement="top"
-    
   >
-    <el-input 
+    <el-input
       ref="input" 
       :value="value"
       :placeholder="placeholder"
       :disabled="disabled"
       @input="($event) => $emit('input', $event)"
       :type="type"
+      clearable
     >
     </el-input>
   </el-tooltip>
 </template>
-<script>
+<script type="text/babel">
 
 export default {
+  name: 'EleTooltipInput',
   data() {
     return {
       offsetWidth: 0,
@@ -28,11 +29,9 @@ export default {
     }
   },
   props: {
-    value: {
-      type: String
-    },
+    value: [String, Number],
     input: {
-      type: String | Number
+      type: String
     },
     placeholder: {
       type: String
@@ -70,9 +69,9 @@ export default {
       }
       let formDisabled = false;
       if (this.$parent && this.$parent._vnode && this.$parent._vnode.tag && this.$parent._vnode.tag === 'form') {
-        formDisabled = this.$parent.disabled;
+        formDisabled = this.$parent && this.$parent.disabled;
       } else if (this.$parent && this.$parent.$parent && this.$parent.$parent._vnode.tag && this.$parent.$parent._vnode.tag === 'form') {
-        formDisabled = this.$parent.$parent.disabled;
+        formDisabled = this.$parent && this.$parent.$parent && this.$parent.$parent.disabled;
       }
       // false则显示tooltip  true则不显示
       const isDomOverWidth = scrollWidth > offsetWidth;
