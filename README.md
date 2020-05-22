@@ -6,11 +6,11 @@ vue插件，基于element-ui实现动态表单提示框(tooltip)
 
 > 输入框
 
-[![input演示图片](http://qam0b3d9s.bkt.clouddn.com/ele-tooltip-input.gif "input演示图片")](https://github.com/tiandaoyi/ele-tooltip-input "input演示图片")
+[![input演示图片](http://qam0b3d9s.bkt.clouddn.com/ele-tooltip-input.gif "input演示图片")](https://github.com/tiandaoyi/ele-tooltip-form "input演示图片")
 
 > 下拉框
 
-[![select演示图片](http://qam0b3d9s.bkt.clouddn.com/ele-tooltip-select.gif "select演示图片")](https://github.com/tiandaoyi/ele-tooltip-input "select演示图片")
+[![select演示图片](http://qam0b3d9s.bkt.clouddn.com/ele-tooltip-select.gif "select演示图片")](https://github.com/tiandaoyi/ele-tooltip-form "select演示图片")
 
 ## 功能
 
