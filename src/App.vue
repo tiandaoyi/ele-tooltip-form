@@ -3,14 +3,12 @@
     <button @click="formDisabled = !formDisabled" style="margin-bottom: 50px">form是否禁用：{{formDisabled ? '是' : '否'}}</button>
     <button @click="disabled1 = !disabled1" style="margin-bottom: 50px">input是否禁用：{{disabled1 ? '是' : '否'}}</button>
 
-    <!-- <el-form :disabled="formDisabled"> -->
+    <el-form :disabled="formDisabled">
       <div>下拉框(引入样式版本)</div>
 
-      <!-- <EleTooltipInput v-model="msg" :disabled="disabled1"></EleTooltipInput> -->
-      <EleTooltipSelect v-model="arr" :disabled="disabled1" :options="options"></EleTooltipSelect>
-      
-    
-    <!-- </el-form> -->
+      <EleTooltipInput v-model="msg" :disabled="disabled1"></EleTooltipInput>
+      <!-- <EleTooltipSelect v-model="arr" :disabled="disabled1" :options="options"></EleTooltipSelect> -->
+    </el-form>
     
   </div>
 </template>
