@@ -32,5 +32,6 @@ export {
 	EleTooltipDate,
 	EleTooltipInputNum,
 	EleTooltipRadio,
-	EleTooltipSwitch
+	EleTooltipSwitch,
+	EleTooltipCascader
 }
