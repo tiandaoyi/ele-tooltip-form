@@ -3,9 +3,15 @@
     <!-- 超出6个字省略号 -->
     <template v-if="label">
       <span v-if="required" class="ele-tooltip-input__required">*</span>
-      <span class="ele-tooltip-input__label" v-if="label && label.length <= 6">{{label}}</span>
+      <span
+        class="ele-tooltip-input__label"
+        v-if="label && label.length <= 6"
+        >{{ label }}</span
+      >
       <el-tooltip v-else :content="label" placement="top">
-        <span class="ele-tooltip-input__label">{{label.slice(0,5) + '..'}}</span>
+        <span class="ele-tooltip-input__label">{{
+          label.slice(0, 5) + ".."
+        }}</span>
       </el-tooltip>
     </template>
     <el-form-item :prop="prop">
@@ -17,22 +23,19 @@
         :picker-options="pickerOptions"
         :type="type"
         :editable="editable"
-        @blur="onBlur"
       />
     </el-form-item>
   </div>
-
 </template>
 <script type="text/babel">
-
 export default {
-  name: 'EleTooltipDate',
+  name: "EleTooltipDate",
   data() {
     return {
       offsetWidth: 0,
       scrollWidth: 0,
       currentValue: null
-    }
+    };
   },
   props: {
     value: [Number, String, Date],
@@ -46,12 +49,12 @@ export default {
       type: Boolean,
       default: false
     },
-    valueFormat:{
-      type: String,
+    valueFormat: {
+      type: String
     },
     type: {
       type: String,
-      default: 'date'
+      default: "date"
     },
     label: {
       type: String
@@ -71,21 +74,15 @@ export default {
   watch: {
     value: {
       handler(e) {
-        this.currentValue = e
+        this.currentValue = e;
       },
       immediate: true
     },
     currentValue: {
       handler(e) {
-        this.$emit('input', e);
+        this.$emit("input", e);
       }
     }
-  },
-  methods: {
-    onBlur() {
-      this.$emit('blur')
-    }
   }
-}
-
+};
 </script>

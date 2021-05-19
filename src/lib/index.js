@@ -4,6 +4,7 @@ import EleTooltipDate from './TooltipDate';
 import EleTooltipInputNum from './TooltipInputNum';
 import EleTooltipRadio from './TooltipRadio';
 import EleTooltipSwitch from './TooltipSwitch';
+import EleTooltipCascader from './TooltipCascader';
 
 const installer = {
 	EleTooltipInput,
@@ -11,7 +12,8 @@ const installer = {
 	EleTooltipDate,
 	EleTooltipInputNum,
 	EleTooltipRadio,
-	EleTooltipSwitch
+	EleTooltipSwitch,
+	EleTooltipCascader
 }
 
 const batchBindInstall = (obj) => {

@@ -17,29 +17,19 @@
     >
       <el-form-item :prop="prop">
         <!-- 多选或者非必填都是可清除 -->
-        <el-select
+        <el-cascader
           ref="select"
-          :value="value"
-          :multiple="multiple"
-          :clearable="multiple || !required"
-          collapse-tags
+          :clearable="clearable"
           @change="onChange($event)"
+          v-model="currentValue"
           :placeholder="placeholder || ''"
           :disabled="disabled"
           :filterable="filterable"
-          :allow-create="allowCreate"
-          :remote="!!selectFetch"
-          :remote-method="selectFetch"
+          :props="props || {}"
+          :options="options"
+          :show-all-levels ="showAllLevels"
           >
-          <el-option
-            v-for="(item, index) of options"
-            :key="index"
-            :label="labelKey ? item[labelKey] : item.label"
-            :value="valueKey ? item[valueKey] : item.value"
-            :disabled="itemDisabled && item.disabled"
-          >
-          </el-option>
-        </el-select>
+        </el-cascader>
       </el-form-item>
     </el-tooltip>
   </div>
@@ -52,12 +42,10 @@ export default {
     return {
       offsetWidth: 0,
       scrollWidth: 0,
+      currentValue: null
     }
   },
   props: {
-    selectFetch: {
-      type: Function
-    },
     options: {
       type: Array,
       default: []
@@ -66,7 +54,7 @@ export default {
       type: Boolean,
       default: false
     },
-    value: [Array, Number, String,Object ],
+    value: [Array, Number, String ],
     input: {
       type: [Array, String, Number, Boolean]
     },
@@ -106,13 +94,11 @@ export default {
       type: Boolean,
       default: false
     },
-    allowCreate: {
+    clearable: Boolean,
+    props: Object,
+    showAllLevels: {
       type: Boolean,
-      default: false
-    },
-    isSimpleClick: {
-      type: Boolean,
-      default: false
+      default: true
     }
   },
   computed: {
@@ -139,14 +125,23 @@ export default {
   },
   methods: {
     onChange(e) {
-      if (this.isSimpleClick) {
-        this.$emit('simpleClick', e);
-      } else {
-        this.$emit('input', e);
-      }
+      this.$emit('change', e);
       this.change && this.change()
     }
   },
+  watch: {
+    value: {
+      handler(e) {
+        this.currentValue = e
+      },
+      immediate: true
+    },
+    currentValue: {
+      handler(e) {
+        this.$emit('input', e);
+      }
+    }
+  }
 }
 
 </script>

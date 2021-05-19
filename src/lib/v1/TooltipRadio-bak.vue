@@ -3,16 +3,28 @@
     <!-- 超出6个字省略号 -->
     <template v-if="label">
       <span v-if="required" class="ele-tooltip-input__required">*</span>
-      <span class="ele-tooltip-input__label" v-if="label && label.length <= 6">{{label}}</span>
+      <span
+        class="ele-tooltip-input__label"
+        v-if="label && label.length <= 6"
+        >{{ label }}</span
+      >
       <el-tooltip v-else :content="label" placement="top">
-        <span class="ele-tooltip-input__label">{{label.slice(0,5) + '..'}}</span>
+        <span class="ele-tooltip-input__label">{{
+          label.slice(0, 5) + ".."
+        }}</span>
       </el-tooltip>
     </template>
     <el-form-item :prop="prop">
-    <el-radio-group v-model="radioValue">
-      <el-radio :disabled="disabled" :label="item.value" v-for="(item,index) of radioList" :key="index"
-      @change="($event) => $emit('input', $event)">{{item.text}}</el-radio>
-    </el-radio-group>
+      <el-radio-group v-model="radioValue">
+        <el-radio
+          :disabled="disabled"
+          :label="item.value"
+          v-for="(item, index) of radioList"
+          :key="index"
+          @change="$event => $emit('input', $event)"
+          >{{ item.text }}</el-radio
+        >
+      </el-radio-group>
     </el-form-item>
   </div>
 </template>
@@ -21,12 +33,12 @@ export default {
   name: "EleTooltipRadio",
   data() {
     return {
-      radioValue:null,
+      radioValue: null
     };
   },
   props: {
     value: Boolean,
-    radioList:{
+    radioList: {
       type: Array
     },
     input: {
@@ -56,13 +68,13 @@ export default {
   watch: {
     value: {
       handler(e) {
-        this.radioValue = e
+        this.radioValue = e;
       },
       immediate: true
     },
     radioValue: {
       handler(e) {
-        this.$emit('input', e);
+        this.$emit("input", e);
       }
     }
   }

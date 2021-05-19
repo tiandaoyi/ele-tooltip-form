@@ -3,26 +3,33 @@
     <!-- 超出6个字省略号 -->
     <template v-if="label">
       <span v-if="required" class="ele-tooltip-input__required">*</span>
-      <span class="ele-tooltip-input__label" v-if="label && label.length <= 6">{{label}}</span>
+      <span
+        class="ele-tooltip-input__label"
+        v-if="label && label.length <= 6"
+        >{{ label }}</span
+      >
       <el-tooltip v-else :content="label" placement="top">
-        <span class="ele-tooltip-input__label">{{label.slice(0,5) + '..'}}</span>
+        <span class="ele-tooltip-input__label">{{
+          label.slice(0, 5) + ".."
+        }}</span>
       </el-tooltip>
     </template>
     <el-form-item :prop="prop">
-    <el-input-number 
-    :size="size"
-    :step="step"
-    controls-position="right"
-    v-model="numValue"
-    :disabled="disabled"
-    :precision="precision"
-    :min="min"
-    :max="max"
-     @change="($event) => $emit('change', $event)"
-     :placeholder="placeholder || ''"
-     @clear="clear && clear()"
-     @focus="focus && focus()">
-    </el-input-number>
+      <el-input-number
+        :size="size"
+        :step="step"
+        controls-position="right"
+        v-model="numValue"
+        :disabled="disabled"
+        :precision="precision"
+        :min="min"
+        :max="max"
+        @change="$event => $emit('change', $event)"
+        :placeholder="placeholder || ''"
+        @clear="clear && clear()"
+        @focus="focus && focus()"
+      >
+      </el-input-number>
     </el-form-item>
   </div>
 </template>
@@ -31,7 +38,7 @@ export default {
   name: "EleTooltipRadio",
   data() {
     return {
-      numValue:null,
+      numValue: null
     };
   },
   props: {
@@ -49,15 +56,15 @@ export default {
     },
     min: {
       type: Number,
-      default: null,
+      default: null
     },
-    size:{
-      type: String,
+    size: {
+      type: String
       // default: 'mini'
     },
     value: Number,
     input: {
-      type: Number 
+      type: Number
     },
     placeholder: {
       type: String
@@ -83,13 +90,13 @@ export default {
   watch: {
     value: {
       handler(e) {
-        this.numValue = e
+        this.numValue = e;
       },
       immediate: true
     },
     numValue: {
       handler(e) {
-        this.$emit('input', e);
+        this.$emit("input", e);
       }
     }
   }

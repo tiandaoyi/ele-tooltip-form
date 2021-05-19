@@ -3,16 +3,22 @@
     <!-- 超出6个字省略号 -->
     <template v-if="label">
       <span v-if="required" class="ele-tooltip-input__required">*</span>
-      <span class="ele-tooltip-input__label" v-if="label && label.length <= 6">{{label}}</span>
+      <span
+        class="ele-tooltip-input__label"
+        v-if="label && label.length <= 6"
+        >{{ label }}</span
+      >
       <el-tooltip v-else :content="label" placement="top">
-        <span class="ele-tooltip-input__label">{{label.slice(0,5) + '..'}}</span>
+        <span class="ele-tooltip-input__label">{{
+          label.slice(0, 5) + ".."
+        }}</span>
       </el-tooltip>
     </template>
-    <el-tooltip 
-      :disabled="toolTipDisabled" 
-      class="item" 
-      effect="light" 
-      :content="selectedString" 
+    <el-tooltip
+      :disabled="toolTipDisabled"
+      class="item"
+      effect="light"
+      :content="selectedString"
       placement="top"
     >
       <el-form-item :prop="prop">
@@ -28,9 +34,7 @@
           :disabled="disabled"
           :filterable="filterable"
           :allow-create="allowCreate"
-          :remote="!!selectFetch"
-          :remote-method="selectFetch"
-          >
+        >
           <el-option
             v-for="(item, index) of options"
             :key="index"
@@ -45,19 +49,15 @@
   </div>
 </template>
 <script type="text/babel">
-
 export default {
-  name: 'EleTooltipSelect',
+  name: "EleTooltipSelect",
   data() {
     return {
       offsetWidth: 0,
-      scrollWidth: 0,
-    }
+      scrollWidth: 0
+    };
   },
   props: {
-    selectFetch: {
-      type: Function
-    },
     options: {
       type: Array,
       default: []
@@ -66,7 +66,7 @@ export default {
       type: Boolean,
       default: false
     },
-    value: [Array, Number, String,Object ],
+    value: [Array, Number, String],
     input: {
       type: [Array, String, Number, Boolean]
     },
@@ -89,7 +89,7 @@ export default {
     },
     type: {
       type: String,
-      default: 'text'
+      default: "text"
     },
     label: {
       type: String
@@ -118,35 +118,56 @@ export default {
   computed: {
     toolTipDisabled() {
       let formDisabled = false;
-      if (this.$parent && this.$parent._vnode && this.$parent._vnode.tag && this.$parent._vnode.tag === 'form') {
+      if (
+        this.$parent &&
+        this.$parent._vnode &&
+        this.$parent._vnode.tag &&
+        this.$parent._vnode.tag === "form"
+      ) {
         formDisabled = this.$parent && this.$parent.disabled;
-      } else if (this.$parent && this.$parent.$parent && this.$parent.$parent._vnode.tag && this.$parent.$parent._vnode.tag === 'form') {
-        formDisabled = this.$parent && this.$parent.$parent && this.$parent.$parent.disabled;
+      } else if (
+        this.$parent &&
+        this.$parent.$parent &&
+        this.$parent.$parent._vnode.tag &&
+        this.$parent.$parent._vnode.tag === "form"
+      ) {
+        formDisabled =
+          this.$parent && this.$parent.$parent && this.$parent.$parent.disabled;
       }
-      const hasMoreValue = this.value && Array.isArray(this.value) && this.value.length > 1;
-      return this.disabled ? !hasMoreValue : formDisabled === true ? !hasMoreValue : true;
+      const hasMoreValue =
+        this.value && Array.isArray(this.value) && this.value.length > 1;
+      return this.disabled
+        ? !hasMoreValue
+        : formDisabled === true
+        ? !hasMoreValue
+        : true;
     },
     selectedString() {
       const selectedStringArray = [];
       (this.options || []).forEach(item => {
-        if (Array.isArray(this.value) && this.value.includes(item[this.valueKey || 'value']) || (item[this.valueKey || 'value'] === this.value)) {
-          selectedStringArray.push(item[this.labelKey || 'label']);
+        if (
+          (Array.isArray(this.value) &&
+            this.value.includes(item[this.valueKey || "value"])) ||
+          item[this.valueKey || "value"] === this.value
+        ) {
+          selectedStringArray.push(item[this.labelKey || "label"]);
         }
       });
       // @TODO 可以考虑直接适用value
-      return this.allowCreate ? this.value?.toString() : selectedStringArray?.toString()
+      return this.allowCreate
+        ? this.value?.toString()
+        : selectedStringArray?.toString();
     }
   },
   methods: {
     onChange(e) {
       if (this.isSimpleClick) {
-        this.$emit('simpleClick', e);
+        this.$emit("simpleClick", e);
       } else {
-        this.$emit('input', e);
+        this.$emit("input", e);
       }
-      this.change && this.change()
+      this.change && this.change();
     }
-  },
-}
-
+  }
+};
 </script>
