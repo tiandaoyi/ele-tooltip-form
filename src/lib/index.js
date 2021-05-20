@@ -16,22 +16,12 @@ const installer = {
 	EleTooltipCascader
 }
 
-const batchBindInstall = (obj) => {
-	for (let i in obj) {
-		const currInstaller = installer[i]
-		currInstaller.install = (Vue) => {
+export default {
+  install: function (Vue) {
+		for (let i in installer) {
+			const currInstaller = installer[i]
 			Vue.component(currInstaller.name, currInstaller)
 		}
-	}
+  }
 }
-batchBindInstall(installer)
 
-export {
-  EleTooltipInput,
-	EleTooltipSelect,
-	EleTooltipDate,
-	EleTooltipInputNum,
-	EleTooltipRadio,
-	EleTooltipSwitch,
-	EleTooltipCascader
-}

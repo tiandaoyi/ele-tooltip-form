@@ -1,14 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
-import {
-  EleTooltipInput,
-  EleTooltipSelect
-} from './lib/index.js'
+import common from './lib/index.js'
 import ElementUI from 'element-ui';
 
 Vue.use(ElementUI);
-Vue.use(EleTooltipInput);
-Vue.use(EleTooltipSelect);
+Vue.use(common);
 
 new Vue({
   el: '#app',
