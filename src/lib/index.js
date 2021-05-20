@@ -22,6 +22,5 @@ export default {
 			const currInstaller = installer[i]
 			Vue.component(currInstaller.name, currInstaller)
 		}
-  }
+	}
 }
-
